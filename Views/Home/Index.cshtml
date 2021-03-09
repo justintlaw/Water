@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model ProjectList
+
+<header>
+    <h1>Give the gift of water</h1>
+</header>
+
+@foreach (var item in Model.Projects)
+{
+    <partial name="ProjectSummary" model="item" />
+}
+
+@*<div page-model="@Model.PagingInfo" page-action="Index"></div>*@
+
+<ul page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn" page-class-selected="btn-primary" page-url-category="@Model.Type"
+    page-class-normal="btn-outline-dark" class="btn-group pull-right" style="list-style: none;"></ul>
