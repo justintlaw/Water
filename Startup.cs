@@ -26,11 +26,14 @@ namespace Water
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
             services.AddDbContext<CharityDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:WaterCharityConnection"]);
+                options.UseSqlite(Configuration["ConnectionStrings:WaterCharityConnection"]);
             });
             services.AddScoped<ICharityRepository, EFCharityRepository>();
+
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,25 +59,27 @@ namespace Water
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("catpage",
-                    "{category}/{page:int}",
+                    "{category}/{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 endpoints.MapControllerRoute("page",
-                    "{page:int}",
+                    "{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 endpoints.MapControllerRoute("category",
                     "{category}",
-                    new { Controller = "Home", action = "Index", page = 1 });
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
 
                 endpoints.MapControllerRoute(
                     //name: "default",
                     //pattern: "{controller=Home}/{action=Index}/{id?}");
                     "pagination",
-                    "Projects/{page}",
+                    "Projects/{pageNum}",
                     new { Controller = "Home", action = "Index" });
 
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
 
             SeedData.EnsurePopulated(app);

@@ -11,14 +11,14 @@ namespace Water.Migrations
                 name: "Projects",
                 columns: table => new
                 {
-                    ProjectId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Program = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Impact = table.Column<int>(type: "int", nullable: false),
-                    Phase = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompletionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Features = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Type = table.Column<string>(type: "TEXT", nullable: true),
+                    Program = table.Column<string>(type: "TEXT", nullable: true),
+                    Impact = table.Column<int>(type: "INTEGER", nullable: false),
+                    Phase = table.Column<string>(type: "TEXT", nullable: true),
+                    CompletionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Features = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -24,18 +24,18 @@ namespace Water.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index(string category, int page = 1)
+        public IActionResult Index(string category, int pageNum = 1)
         {
             return View(new ProjectList
             {
                 Projects = _repository.Projects
                     .Where(p => category == null || p.Type == category)
                     .OrderBy(p => p.ProjectId)
-                    .Skip((page - 1) * PageSize)
+                    .Skip((pageNum - 1) * PageSize)
                     .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
-                    CurrentPage = page,
+                    CurrentPage = pageNum,
                     ItemsPerPage = PageSize,
                     TotalNumItems = category == null ? _repository.Projects.Count() :
                         _repository.Projects.Where(item => item.Type == category).Count()

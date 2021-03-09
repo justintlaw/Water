@@ -65,7 +65,7 @@ namespace Water.Infrastructure
                 TagBuilder listItem = new TagBuilder("li");
                 TagBuilder link = new TagBuilder("a");
 
-                PageUrlValues["page"] = i;
+                PageUrlValues["pageNum"] = i;
 
                 link.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
                 
